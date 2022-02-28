@@ -28,6 +28,7 @@ export default class StellarPubSub extends StellarCore {
   subscribe(channel, messageHandler, { responseType } = {}) {
     const subscriberMiddlewares = [].concat(this.handlerChain, {
       fn({ headers, body }) {
+        console.log('stelaar Pub sub Headers', headers);
         const message = includes(['raw', 'jobData'], responseType) ? { headers, body } : body;
         return messageHandler(message);
       },
